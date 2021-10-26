@@ -14,6 +14,13 @@ import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     private List<Films> films = new ArrayList<>();
+    private ItemRvBinding binding;
+    private AdapterClickListener clickListener;
+
+    public void setClickListener(AdapterClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
 
     public void setFilms(List<Films> films) {
         this.films = films;
@@ -23,7 +30,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       return new ViewHolder(ItemRvBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
+        binding = ItemRvBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new ViewHolder(binding);
     }
 
     @Override
@@ -49,9 +57,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             binding.text.setText(films.getTitle());
             binding.text2.setText(films.getDirector());
 
+            itemView.setOnClickListener(v -> {
+                clickListener.onClick(films);
+            });
 
         }
     }
 
-
+    public interface AdapterClickListener {
+        void onClick(Films films);
+    }
 }

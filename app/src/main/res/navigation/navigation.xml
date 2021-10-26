@@ -10,4 +10,9 @@
         android:name="com.example.android32.ui.FilmFragment"
         android:label="fragment_film"
         tools:layout="@layout/fragment_film" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.android32.ui.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" />
 </navigation>
